@@ -24,13 +24,6 @@ class _CalculadoraAppState extends State<CalculadoraApp> {
   late double total;
 
   void C() {
-    if (historial.endsWith("/") == false &&
-        !historial.endsWith("*") == false &&
-        !historial.endsWith("+") == false &&
-        !historial.endsWith("-") == false &&
-        !historial.endsWith("=") == false) {
-      historial = historial + "=" + txtMain;
-    }
     txtMain = "";
     num1 = 0;
     num2 = 0;
@@ -48,7 +41,7 @@ class _CalculadoraAppState extends State<CalculadoraApp> {
   void cambiarSigno() {
     numaux = int.parse(txtMain) * -1;
     aux = numaux.toString();
-    aux = aux.substring(0, aux.length - 2);
+    if (aux.endsWith(".0")) aux = aux.substring(0, aux.length - 2);
   }
 
   void btnOnClick(String btnValor) {
@@ -114,19 +107,6 @@ class _CalculadoraAppState extends State<CalculadoraApp> {
       aux = double.parse(txtMain + btnValor).toString();
       if (aux.endsWith(".0")) {
         aux = aux.substring(0, aux.length - 2);
-      }
-      if (aux.contains(".")) {
-        int n = 0;
-        String s_aux;
-        for (var i = 0; i < aux.length; i++) {
-          s_aux = aux.toLowerCase().substring(i);
-          if (s_aux.startsWith(".")) {
-            n = i;
-          }
-        }
-        if (aux.length > 6) {
-          aux = aux.substring(0, n + 5);
-        }
       }
     }
 
